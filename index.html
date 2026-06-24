@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Burn Center of the Caribbean — Healing Puerto Rico's children, close to home</title>
+<meta name="description" content="Building Puerto Rico's first comprehensive pediatric burn center — and a financial safety net so no family is bankrupted for saving their child's life.">
+<!--
+  FIRST DRAFT — imagery pass.
+  PHOTOS: the boxes in the "gallery" and hero are real <img> slots backed by /images.
+    Drop your OWN licensed, consent-cleared photographs into /images (see images/README.md).
+    Until a file exists, a styled fallback shows instead of a broken image.
+    Do NOT present stock or unrelated photos as actual patients/beneficiaries.
+  PRIVACY: the internal Feasibility Brief is intentionally NOT embedded (public repo).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --deep:#0E3A43; --teal:#127C8E; --aqua:#5FB6C4; --green:#3F8E76;
+    --sun:#FFB36B; --coral:#F2A285; --sand:#F4E3C8;
+    --mist:#EEF5F5; --paper:#FCFEFE; --ink:#22323A; --muted:#5C6F77; --line:#D8E6E6;
+    --serif:'Fraunces',Georgia,'Times New Roman',serif;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    --wrap:1140px; --r:14px;
+    --shadow:0 18px 50px -28px rgba(14,58,67,.45);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;color:var(--deep);margin:0;letter-spacing:-.01em;}
+  p{margin:0 0 1rem;}
+  a{color:var(--teal);text-decoration:none;}
+  img{max-width:100%;}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:var(--sans);font-weight:600;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);margin:0 0 .9rem;}
+  .lead{font-size:1.18rem;color:#33464e;}
+  .section{padding:92px 0;}
+  .section--mist{background:var(--mist);}
+  .section--deep{background:var(--deep);color:#dcebec;}
+  .section--deep h2,.section--deep h3{color:#fff;}
+  .center{text-align:center;}
+  .skip{position:absolute;left:-999px;top:0;background:#fff;padding:10px 16px;border-radius:8px;z-index:200;}
+  .skip:focus{left:16px;top:16px;}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--sans);font-weight:600;font-size:.98rem;
+    padding:.85em 1.5em;border-radius:999px;border:1.5px solid transparent;cursor:pointer;transition:.18s ease;text-align:center;}
+  .btn--primary{background:var(--teal);color:#fff;}
+  .btn--primary:hover{background:#0d6577;transform:translateY(-1px);}
+  .btn--ghost{background:transparent;color:var(--deep);border-color:var(--line);}
+  .btn--ghost:hover{border-color:var(--teal);color:var(--teal);}
+  .btn--light{background:#fff;color:var(--deep);}
+  .btn--light:hover{transform:translateY(-1px);}
+  .btn--ondeep{background:var(--aqua);color:var(--deep);}
+  .btn--ondeep:hover{background:#74c4d1;transform:translateY(-1px);}
+  :focus-visible{outline:3px solid var(--aqua);outline-offset:2px;border-radius:4px;}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:100;background:rgba(252,254,254,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+  .nav__row{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:600;color:var(--deep);font-size:1.06rem;letter-spacing:-.01em;}
+  .brand svg{flex:0 0 auto;}
+  .nav__links{display:flex;align-items:center;gap:30px;}
+  .nav__links a{font-family:var(--sans);font-weight:500;font-size:.93rem;color:#314750;}
+  .nav__links a:hover{color:var(--teal);}
+  .nav__toggle{display:none;background:none;border:0;cursor:pointer;padding:8px;}
+  .nav__toggle span{display:block;width:22px;height:2px;background:var(--deep);margin:4px 0;transition:.2s;}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;background:
+     radial-gradient(120% 90% at 82% 8%, rgba(95,182,196,.20), rgba(95,182,196,0) 60%),
+     linear-gradient(180deg,#fbfdfd 0%, #f3f9f9 100%);}
+  .hero__grid{display:grid;grid-template-columns:1.04fr .96fr;gap:50px;align-items:center;padding:88px 0 84px;}
+  .hero h1{font-size:clamp(2.5rem,5.4vw,4.15rem);font-weight:600;}
+  .hero h1 em{font-style:italic;color:var(--teal);}
+  .hero .lead{margin:1.4rem 0 2rem;max-width:33ch;}
+  .hero__cta{display:flex;gap:14px;flex-wrap:wrap;}
+  .hero__note{margin-top:1.5rem;font-size:.86rem;color:var(--muted);}
+  .hero__art{position:relative;}
+
+  /* photo frames (real <img> slots with graceful fallback) */
+  .frame{position:relative;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);background:linear-gradient(160deg,#bfe6e6,#5FB6C4);}
+  .frame::after{content:attr(data-fallback);position:absolute;inset:0;display:flex;align-items:flex-end;
+    padding:18px 20px;color:#fff;font-size:.82rem;font-weight:600;letter-spacing:.01em;
+    background:linear-gradient(180deg,rgba(14,58,67,0) 40%,rgba(14,58,67,.55));text-shadow:0 1px 2px rgba(0,0,0,.25);}
+  .frame img{position:relative;z-index:1;display:block;width:100%;height:100%;object-fit:cover;}
+  .frame--hero{aspect-ratio:5/4;}
+  .photo{aspect-ratio:4/3;}
+  .photo--b{background:linear-gradient(160deg,#ffd9bd,#F2A285);}
+  .photo--c{background:linear-gradient(160deg,#cfeee0,#3F8E76);}
+
+  /* gallery */
+  .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
+  .photo-note{font-size:.8rem;color:var(--muted);margin-top:16px;text-align:center;}
+
+  /* network signature (model diagram) */
+  .net{width:100%;height:auto;display:block;}
+  .net .link{stroke:var(--aqua);stroke-width:1.6;fill:none;stroke-dasharray:200;stroke-dashoffset:200;opacity:.0;}
+  .in-view .net .link{animation:draw 1.3s ease forwards;}
+  .net .link.l2{animation-delay:.12s;} .net .link.l3{animation-delay:.24s;}
+  .net .link.l4{animation-delay:.36s;} .net .link.l5{animation-delay:.48s;} .net .link.l6{animation-delay:.6s;}
+  @keyframes draw{to{stroke-dashoffset:0;opacity:.85;}}
+  .net .spoke{fill:#fff;stroke:var(--teal);stroke-width:1.6;opacity:0;transform-box:fill-box;transform-origin:center;}
+  .in-view .net .spoke{animation:pop .5s ease forwards;}
+  .net .spoke.s2{animation-delay:.18s;}.net .spoke.s3{animation-delay:.3s;}.net .spoke.s4{animation-delay:.42s;}
+  .net .spoke.s5{animation-delay:.54s;}.net .spoke.s6{animation-delay:.66s;}
+  @keyframes pop{from{opacity:0;transform:scale(.4);}to{opacity:1;transform:scale(1);}}
+  .net .hub{fill:var(--teal);}
+  .net .hub-ring{fill:none;stroke:var(--teal);stroke-width:1.4;opacity:.35;}
+  .net text{font-family:var(--sans);font-size:11px;fill:var(--muted);font-weight:500;}
+  .net .hublabel{fill:var(--deep);font-weight:600;font-size:12px;}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:14px;}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 22px;}
+  .stat__n{font-family:var(--serif);font-size:2.5rem;font-weight:600;color:var(--teal);line-height:1;}
+  .stat__l{font-size:.9rem;color:var(--muted);margin-top:.5rem;}
+  .section--deep .stat{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.14);}
+  .section--deep .stat__n{color:var(--aqua);} .section--deep .stat__l{color:#bcd4d6;}
+
+  /* generic grid */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+  .pillars{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px;}
+  .pillar{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;}
+  .pillar h3{font-size:1.18rem;margin-bottom:.5rem;}
+  .pillar .ic{width:38px;height:38px;border-radius:10px;background:var(--mist);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .pillar p{margin:0;color:#475a62;font-size:.97rem;}
+
+  .mission-quote{font-family:var(--serif);font-size:clamp(1.4rem,2.6vw,2rem);line-height:1.32;color:var(--deep);font-weight:500;border-left:3px solid var(--teal);padding-left:26px;margin:0;}
+  .mission-es{font-style:italic;color:var(--muted);font-size:1.02rem;margin-top:1.2rem;max-width:60ch;}
+
+  /* model */
+  .model-points{list-style:none;padding:0;margin:24px 0 0;}
+  .model-points li{position:relative;padding:0 0 18px 30px;color:#3a4d55;}
+  .model-points li::before{content:"";position:absolute;left:4px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--green);}
+  .model-points b{color:var(--deep);}
+
+  /* giving */
+  .tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px;}
+  .tier{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16);border-radius:var(--r);padding:24px 22px;display:flex;flex-direction:column;}
+  .tier__amt{font-family:var(--serif);font-size:1.7rem;font-weight:600;color:#fff;}
+  .tier__name{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--aqua);margin:.4rem 0 .9rem;font-weight:600;}
+  .tier p{font-size:.92rem;color:#cfe0e2;margin:0;}
+  .tier--feature{background:var(--aqua);border-color:var(--aqua);}
+  .tier--feature .tier__amt{color:var(--deep);} .tier--feature .tier__name{color:#0c4b58;} .tier--feature p{color:#0e3a43;}
+
+  /* news */
+  .news{display:grid;grid-template-columns:1.2fr .8fr;gap:30px;align-items:stretch;}
+  .newscard{display:block;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.2s;box-shadow:var(--shadow);}
+  .newscard:hover{transform:translateY(-3px);border-color:var(--aqua);}
+  .newscard__band{background:var(--deep);color:#cfe6e8;padding:11px 22px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;display:flex;justify-content:space-between;}
+  .newscard__body{padding:26px 24px;}
+  .newscard__body h3{font-size:1.32rem;margin-bottom:.7rem;color:var(--deep);}
+  .newscard__body p{color:#485b63;font-size:.98rem;}
+  .newscard__more{font-weight:600;color:var(--teal);font-size:.92rem;}
+  .news-aside{background:var(--mist);border:1px solid var(--line);border-radius:var(--r);padding:30px;display:flex;flex-direction:column;justify-content:center;}
+  .news-aside p{color:#3c4f57;}
+
+  /* downloads */
+  .dl{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px;}
+  .dlcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;}
+  .dlcard h3{font-size:1.16rem;margin-bottom:.4rem;}
+  .dlcard p{color:#566970;font-size:.94rem;flex:1;}
+  .dlcard .tag{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px;}
+  .dlcard .btn{margin-top:18px;align-self:flex-start;}
+
+  /* forms */
+  .signup{display:flex;gap:12px;flex-wrap:wrap;max-width:560px;}
+  .signup input,.signup select{font-family:var(--sans);font-size:1rem;padding:.85em 1.1em;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);}
+  .signup input[type=email]{flex:1;min-width:220px;}
+  .signup select{min-width:200px;}
+  .section--deep .signup input,.section--deep .signup select{background:rgba(255,255,255,.95);border-color:transparent;}
+  .formmsg{font-size:.92rem;margin-top:12px;min-height:1.2em;font-weight:500;}
+  .formmsg.ok{color:var(--green);} .section--deep .formmsg.ok{color:#9fe8cf;}
+  .formmsg.err{color:#b4543f;} .section--deep .formmsg.err{color:#ffc7b8;}
+
+  /* footer */
+  footer{background:#0a2c33;color:#a9c4c7;padding:64px 0 30px;}
+  .foot-tag{font-family:var(--serif);color:#fff;font-size:1.5rem;font-weight:500;}
+  .foot-es{font-style:italic;color:#7fa3a7;margin-top:.4rem;}
+  .foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:30px;padding-top:26px;border-top:1px solid rgba(255,255,255,.1);font-size:.88rem;}
+  .foot-grid a{color:#bcd6d8;}
+  .fineprint{font-size:.78rem;color:#6f9498;margin-top:24px;line-height:1.6;}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in-view{opacity:1;transform:none;}
+
+  @media (max-width:900px){
+    .hero__grid,.grid-2,.news{grid-template-columns:1fr;gap:34px;}
+    .hero__art{order:-1;max-width:480px;}
+    .stats{grid-template-columns:1fr 1fr;}
+    .pillars,.dl{grid-template-columns:1fr;}
+    .tiers{grid-template-columns:1fr 1fr;}
+    .gallery{grid-template-columns:1fr;}
+    .nav__links{position:fixed;inset:70px 0 auto 0;background:var(--paper);flex-direction:column;align-items:flex-start;gap:0;padding:8px 24px 20px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:.25s;box-shadow:var(--shadow);}
+    .nav__links.open{transform:none;}
+    .nav__links a{padding:13px 0;width:100%;border-bottom:1px solid var(--line);}
+    .nav__links .btn{margin-top:12px;}
+    .nav__toggle{display:block;}
+    .section{padding:64px 0;}
+  }
+  @media (max-width:520px){.stats,.tiers{grid-template-columns:1fr;}}
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important;}
+    .reveal{opacity:1;transform:none;}
+    .net .link{stroke-dashoffset:0;opacity:.85;}.net .spoke{opacity:1;}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav__row">
+    <a class="brand" href="#top" aria-label="The Burn Center of the Caribbean home">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="13" cy="13" r="12" fill="none" stroke="#127C8E" stroke-width="1.6"/><path d="M13 6.5c2.2 2.4 3.4 4.3 3.4 6.2A3.4 3.4 0 0 1 13 16.1a3.4 3.4 0 0 1-3.4-3.4c0-1.9 1.2-3.8 3.4-6.2z" fill="#5FB6C4"/></svg>
+      Burn Center <span style="color:#127C8E">of the Caribbean</span>
+    </a>
+    <nav class="nav__links" id="navlinks" aria-label="Primary">
+      <a href="#reality">The Need</a>
+      <a href="#mission">Mission</a>
+      <a href="#model">Our Model</a>
+      <a href="#give">For Donors</a>
+      <a href="#news">In the News</a>
+      <a class="btn btn--primary" href="#involved">Get Involved</a>
+    </nav>
+    <button class="nav__toggle" id="navtoggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="reveal">
+      <p class="eyebrow">Puerto Rico · A first for the island</p>
+      <h1>Healing burns <em>close to home</em> — before they cost a family everything.</h1>
+      <p class="lead">An island of 3.2 million has no burn center of its own. The most serious cases — many of them children — are flown more than a thousand miles away. We're building the first comprehensive pediatric burn center in Puerto Rico's history.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#give">Support the mission</a>
+        <a class="btn btn--ghost" href="#model">See how it works</a>
+      </div>
+      <p class="hero__note">A feasibility-stage initiative. Establishing a CECFL-listed charitable arm so Act&nbsp;60 child-poverty donations qualify.</p>
+    </div>
+    <div class="hero__art reveal">
+      <!-- HERO PHOTO: drop images/hero.jpg (a warm, consented family/child or Puerto Rico landscape). -->
+      <figure class="frame frame--hero" data-fallback="Add images/hero.jpg — a warm, consent-cleared photo">
+        <img src="images/hero.jpg" alt="A family in Puerto Rico" loading="eager" onerror="this.remove()">
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- REALITY -->
+<section class="section section--deep" id="reality">
+  <div class="wrap">
+    <div class="reveal" style="max-width:760px">
+      <p class="eyebrow" style="color:var(--aqua)">The need</p>
+      <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem)">When a child is severely burned here, two emergencies begin at once.</h2>
+      <p class="lead" style="color:#bcd4d6;margin-top:1.1rem">The first is medical. The second is financial. Today, the most serious cases leave the island for the mainland — and the bill that follows can ruin a family. One Puerto Rican patient was charged <strong style="color:#fff">$1.7 million</strong>. A severe burn can take a child's skin; the debt that follows can take a family's future.</p>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><div class="stat__n">3.2M</div><div class="stat__l">Residents with no burn center of their own</div></div>
+      <div class="stat"><div class="stat__n">~300</div><div class="stat__l">Burn surgeons in the entire United States</div></div>
+      <div class="stat"><div class="stat__n">~6 days</div><div class="stat__l">Average wait to reach a burn surgeon</div></div>
+      <div class="stat"><div class="stat__n">1,000+ mi</div><div class="stat__l">Distance critical cases are flown for care</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="section" id="mission">
+  <div class="wrap grid-2">
+    <div class="reveal">
+      <p class="eyebrow">Our mission</p>
+      <p class="mission-quote">We protect the children of Puerto Rico from the lasting harm of severe burns — healing their injuries close to home, and shielding their families from the medical debt that turns tragedy into poverty.</p>
+      <p class="mission-es">Protegemos a la niñez de Puerto Rico del daño duradero de las quemaduras graves: sanando sus heridas cerca de casa y protegiendo a sus familias de la deuda médica que convierte la tragedia en pobreza.</p>
+    </div>
+    <div class="reveal">
+      <div class="pillars" style="margin-top:0">
+        <div class="pillar"><div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#127C8E" stroke-width="1.8"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg></div><h3>Care for every child</h3><p>Free or subsidized burn treatment for children of low-income families — so poverty never decides whether a child is treated.</p></div>
+        <div class="pillar"><div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#127C8E" stroke-width="1.8"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></div><h3>Financial protection</h3><p>A fund that absorbs catastrophic burn costs, heading off the medical debt that pushes families into poverty.</p></div>
+        <div class="pillar"><div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#127C8E" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Prevention first</h3><p>Burn-safety outreach in the communities where injury risk is highest and families are least able to absorb the cost.</p></div>
+        <div class="pillar"><div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#127C8E" stroke-width="1.8"><path d="M4 12a8 8 0 0 1 14-5M20 12a8 8 0 0 1-14 5"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></div><h3>Recovery &amp; return</h3><p>Rehabilitation and scar care that keep an injured child from being disabled out of school and a future.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGERY GALLERY — real <img> slots. Add your own licensed, consent-cleared photos to /images. -->
+  <div class="wrap reveal" style="margin-top:64px">
+    <div class="gallery">
+      <figure class="frame photo" data-fallback="images/families-1.jpg — families &amp; children">
+        <img src="images/families-1.jpg" alt="Families and children in Puerto Rico" loading="lazy" onerror="this.remove()">
+      </figure>
+      <figure class="frame photo photo--b" data-fallback="images/care-1.jpg — care, close to home">
+        <img src="images/care-1.jpg" alt="A nurse practitioner caring for a child" loading="lazy" onerror="this.remove()">
+      </figure>
+      <figure class="frame photo photo--c" data-fallback="images/island-1.jpg — the island">
+        <img src="images/island-1.jpg" alt="A Puerto Rico coastal community" loading="lazy" onerror="this.remove()">
+      </figure>
+    </div>
+    <p class="photo-note">Photo slots — add your own licensed, consent-cleared photographs to the <code>/images</code> folder (see <code>images/README.md</code>). Don't present stock or unrelated images as actual patients.</p>
+  </div>
+</section>
+
+<!-- MODEL -->
+<section class="section section--mist" id="model">
+  <div class="wrap grid-2">
+    <div class="reveal hero__art">
+      <svg class="net" viewBox="0 0 420 340" role="img" aria-label="Diagram: a central burn center hub connected to nurse-practitioner wound-care clinics across the island">
+        <line class="link l1" x1="210" y1="160" x2="80"  y2="74"/>
+        <line class="link l2" x1="210" y1="160" x2="350" y2="84"/>
+        <line class="link l3" x1="210" y1="160" x2="64"  y2="200"/>
+        <line class="link l4" x1="210" y1="160" x2="362" y2="210"/>
+        <line class="link l5" x1="210" y1="160" x2="150" y2="288"/>
+        <line class="link l6" x1="210" y1="160" x2="300" y2="285"/>
+        <circle class="hub-ring" cx="210" cy="160" r="30"/>
+        <circle class="hub" cx="210" cy="160" r="15"/>
+        <text class="hublabel" x="210" y="200" text-anchor="middle">Burn center · the surgeon</text>
+        <circle class="spoke s1" cx="80"  cy="74"  r="9"/><text x="80"  y="58"  text-anchor="middle">NP clinic</text>
+        <circle class="spoke s2" cx="350" cy="84"  r="9"/><text x="350" y="68"  text-anchor="middle">NP clinic</text>
+        <circle class="spoke s3" cx="64"  cy="200" r="9"/><text x="64"  y="224" text-anchor="middle">NP clinic</text>
+        <circle class="spoke s4" cx="362" cy="210" r="9"/><text x="362" y="234" text-anchor="middle">NP clinic</text>
+        <circle class="spoke s5" cx="150" cy="288" r="9"/><text x="150" y="312" text-anchor="middle">NP clinic</text>
+        <circle class="spoke s6" cx="300" cy="285" r="9"/><text x="300" y="309" text-anchor="middle">NP clinic</text>
+      </svg>
+    </div>
+    <div class="reveal">
+      <p class="eyebrow">A model built to work here</p>
+      <h2 style="font-size:clamp(1.8rem,3.4vw,2.5rem)">One surgeon, multiplied across the island.</h2>
+      <p class="lead" style="margin-top:1rem">Burn surgery is among the scarcest specialties in American medicine. So we don't wait for an impossible number of specialists — we extend the reach of a single expert.</p>
+      <ul class="model-points">
+        <li><b>A central hub</b> provides surgery, critical care, and complex treatment — anchored by an expert burn surgeon.</li>
+        <li><b>A network of nurse-practitioner clinics</b> delivers everyday wound care in communities across the island, close to home.</li>
+        <li><b>Telemedicine</b> connects every clinic to the surgeon in real time, with clear paths to escalate when a child needs more.</li>
+        <li><b>Abundant, expertly trained NPs</b> cost a fraction of a surgeon — making island-wide care both possible and sustainable.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- GIVE / ACT 60 -->
+<section class="section section--deep" id="give">
+  <div class="wrap">
+    <div class="reveal" style="max-width:780px">
+      <p class="eyebrow" style="color:var(--aqua)">For Act 60 residents &amp; philanthropists</p>
+      <h2 style="font-size:clamp(1.9rem,3.6vw,2.7rem)">Your required gift can build something that has never existed.</h2>
+      <p class="lead" style="color:#bcd4d6;margin-top:1.1rem">As an Act&nbsp;60 resident, your annual child-poverty contribution is already required. Directed here, it becomes founding capital for the first pediatric burn safety net in Puerto Rico's history — in the place you now call home. You won't be one more donor to an established charity. You'll be a <strong style="color:#fff">founder</strong> of something that protects children for generations.</p>
+    </div>
+    <div class="tiers reveal">
+      <div class="tier"><div class="tier__amt">$5,000</div><div class="tier__name">Guardian</div><p>Your required child-poverty gift, transformed — weeks of expert burn care for low-income children through our NP network.</p></div>
+      <div class="tier"><div class="tier__amt">$25,000</div><div class="tier__name">Protector</div><p>The complete outpatient recovery of several children — every dressing, follow-up, and scar treatment, at no cost to families.</p></div>
+      <div class="tier tier--feature"><div class="tier__amt">$100,000</div><div class="tier__name">Founder's Circle</div><p>A full year of a specially trained burn nurse practitioner — one provider, hundreds of children cared for close to home.</p></div>
+      <div class="tier"><div class="tier__amt">$250k+</div><div class="tier__name">Founding Benefactor</div><p>Establish and name a community burn clinic, or endow a program. Founding board invitation.</p></div>
+    </div>
+    <div class="reveal" style="margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;align-items:center">
+      <a class="btn btn--ondeep" href="#involved">Talk to us about giving</a>
+      <span style="font-size:.84rem;color:#9fbabd">Illustrative impact based on projected program costs at feasibility stage.</span>
+    </div>
+  </div>
+</section>
+
+<!-- NEWS -->
+<section class="section" id="news">
+  <div class="wrap">
+    <div class="reveal" style="max-width:720px;margin-bottom:38px">
+      <p class="eyebrow">Burns in the news</p>
+      <h2 style="font-size:clamp(1.8rem,3.4vw,2.4rem)">Why this work can't wait.</h2>
+      <p class="lead" style="margin-top:.9rem">The cost of having no burn center of our own isn't abstract. It shows up in real families' lives.</p>
+    </div>
+    <div class="news reveal">
+      <a class="newscard" href="https://www.cbsnews.com/news/burn-victim-1-7-million-dollar-medical-bill-military-hospital-waived/" target="_blank" rel="noopener">
+        <div class="newscard__band"><span>CBS News</span><span>2021</span></div>
+        <div class="newscard__body">
+          <h3>A Puerto Rican burn survivor's $1.7 million bill</h3>
+          <p>A young man from Puerto Rico, burned over 70% of his body in a gas explosion, was flown to a Texas military hospital for seven months and 19 surgeries — then billed $1.7&nbsp;million. The debt was waived only after members of Congress intervened.</p>
+          <span class="newscard__more">Read the story at CBS News →</span>
+        </div>
+      </a>
+      <div class="news-aside">
+        <p style="font-family:var(--serif);font-size:1.25rem;color:var(--deep);line-height:1.35;font-weight:500;margin-bottom:.8rem">Most families don't have a Congress to call.</p>
+        <p style="margin:0">That's the gap we exist to close — expert burn care on the island, and a safety net so no family faces that bill alone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOADS -->
+<section class="section section--mist" id="resources">
+  <div class="wrap">
+    <div class="reveal" style="max-width:680px">
+      <p class="eyebrow">Resources</p>
+      <h2 style="font-size:clamp(1.7rem,3.2vw,2.3rem)">Read the case, in depth.</h2>
+      <p class="lead" style="margin-top:.8rem">Download our materials to learn more, share with colleagues, or bring to your advisor.</p>
+    </div>
+    <div class="dl reveal">
+      <div class="dlcard">
+        <div class="tag">For donors</div>
+        <h3>The Case for Support</h3>
+        <p>A one-page overview of the need, the model, and how your gift builds the island's first pediatric burn safety net.</p>
+        <a class="btn btn--primary" href="docs/Case-for-Support.pdf" download>Download the PDF</a>
+      </div>
+      <div class="dlcard">
+        <div class="tag">For partners &amp; funders</div>
+        <h3>Feasibility Brief</h3>
+        <p>A public summary of the plan — the need, the care model, workforce approach, regulatory path, and the key considerations ahead. The full working brief is shared with partners and funders on request.</p>
+        <a class="btn btn--primary" href="docs/Feasibility-Brief-Public.pdf" download>Download the summary</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVOLVED / EMAIL -->
+<section class="section" id="involved">
+  <div class="wrap center" style="max-width:680px">
+    <div class="reveal">
+      <p class="eyebrow">Get involved</p>
+      <h2 style="font-size:clamp(1.9rem,3.6vw,2.6rem)">Help us build it.</h2>
+      <p class="lead" style="margin:1rem auto 2rem">Join the list to follow our progress, explore giving, or get involved as a clinician or partner. We'll be in touch — no spam, ever.</p>
+      <form class="signup" data-source="get-involved" style="justify-content:center" onsubmit="return handleSignup(this)" novalidate>
+        <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
+        <select name="interest" aria-label="I'm interested as a">
+          <option value="">I'm interested as a…</option>
+          <option value="donor">Donor / philanthropist</option>
+          <option value="clinician">Clinician (surgeon / NP / nurse)</option>
+          <option value="partner">Hospital / institutional partner</option>
+          <option value="follower">Just keeping in touch</option>
+        </select>
+        <button class="btn btn--primary" type="submit">Join the list</button>
+        <p class="formmsg" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="reveal">
+      <p class="foot-tag">Heal the child. Protect the family. Break the cycle.</p>
+      <p class="foot-es">Sanar al niño. Proteger a la familia. Romper el ciclo.</p>
+    </div>
+    <div class="foot-grid">
+      <div>The Burn Center of the Caribbean<br><span style="color:#7fa3a7">Puerto Rico</span></div>
+      <div>
+        <a href="#give">For donors</a> &nbsp;·&nbsp;
+        <a href="#model">Our model</a> &nbsp;·&nbsp;
+        <a href="#involved">Get involved</a> &nbsp;·&nbsp;
+        <a href="mailto:hello@example.org">Contact</a>
+      </div>
+    </div>
+    <p class="fineprint">A feasibility-stage initiative. The Center's charitable arm is being established as a CECFL-listed nonprofit so that Act&nbsp;60 child-poverty donations qualify; listing and tax-exempt status are pending. Figures shown are directional and illustrative. Photographs are placeholders pending licensed, consent-cleared imagery. Contact information is a placeholder pending launch.</p>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  var t=document.getElementById('navtoggle'), l=document.getElementById('navlinks');
+  t.addEventListener('click',function(){
+    var open=l.classList.toggle('open');
+    t.setAttribute('aria-expanded',open);
+  });
+  l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('open');t.setAttribute('aria-expanded',false);});});
+
+  // Scroll reveal + signature animation
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target);} });
+  },{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+  // Email capture
+  // ▸ To collect submissions, paste your form endpoint below (Formspree, Mailchimp, ConvertKit, Netlify Forms, etc.).
+  //   Leave blank to run in demo mode (shows confirmation without sending).
+  var SIGNUP_ENDPOINT = "";
+  function showMsg(form,text,cls){var m=form.querySelector('.formmsg');m.textContent=text;m.className='formmsg '+cls;}
+  function handleSignup(form){
+    var email=(form.querySelector('input[type=email]').value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){showMsg(form,'Please enter a valid email address.','err');return false;}
+    var sel=form.querySelector('select');
+    var payload={email:email,interest:sel?sel.value:'',source:form.dataset.source||'',ts:new Date().toISOString()};
+    if(SIGNUP_ENDPOINT){
+      fetch(SIGNUP_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+        .then(function(r){if(!r.ok)throw 0;showMsg(form,"Thank you — you're on the list. We'll be in touch.",'ok');form.reset();})
+        .catch(function(){showMsg(form,'Something went wrong — please try again in a moment.','err');});
+    } else {
+      showMsg(form,"Thank you — you're on the list. We'll be in touch.",'ok');form.reset();
+    }
+    return false;
+  }
+</script>
+</body>
+</html>
