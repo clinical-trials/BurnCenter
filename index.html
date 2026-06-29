@@ -196,6 +196,10 @@
   .foot-grid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;margin-top:30px;padding-top:26px;border-top:1px solid rgba(255,255,255,.1);font-size:.88rem;}
   .foot-grid a{color:#bcd6d8;}
   .fineprint{font-size:.78rem;color:#6f9498;margin-top:24px;line-height:1.6;}
+  .visitors{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:8px 15px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.04);font-size:.84rem;color:#bcd6d8;}
+  .visitors__n{font-family:var(--serif);font-weight:600;color:#fff;font-size:1.02rem;}
+  .visitors__dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--aqua);animation:vpulse 2.2s ease-out infinite;}
+  @keyframes vpulse{0%{box-shadow:0 0 0 0 rgba(95,182,196,.55);}70%{box-shadow:0 0 0 8px rgba(95,182,196,0);}100%{box-shadow:0 0 0 0 rgba(95,182,196,0);}}
 
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
   .reveal.in-view{opacity:1;transform:none;}
@@ -488,6 +492,10 @@
         <a href="mailto:hello@example.org">Contact</a>
       </div>
     </div>
+    <div class="visitors" id="visitorCount" hidden aria-live="polite">
+      <span class="visitors__dot" aria-hidden="true"></span>
+      <span><span class="visitors__n">—</span> visitors and counting</span>
+    </div>
     <p class="fineprint">A feasibility-stage initiative. The Center's charitable arm is being established as a CECFL-listed nonprofit so that Act&nbsp;60 child-poverty donations qualify; listing and tax-exempt status are pending. Figures shown are directional and illustrative. Photographs are placeholders pending licensed, consent-cleared imagery. Contact information is a placeholder pending launch.</p>
   </div>
 </footer>
@@ -526,6 +534,33 @@
     }
     return false;
   }
+
+  // Visitor counter — free, no backend. Counts each browser once (localStorage),
+  // falls back to a second service, and hides itself silently if both are unreachable.
+  (function(){
+    var el=document.getElementById('visitorCount');
+    if(!el) return;
+    var nEl=el.querySelector('.visitors__n');
+    function show(v){ nEl.textContent=Number(v).toLocaleString(); el.hidden=false; }
+    function timed(url){
+      var ctrl=('AbortController' in window)?new AbortController():null;
+      var t=ctrl?setTimeout(function(){ctrl.abort();},6000):null;
+      return fetch(url,{cache:'no-store',signal:ctrl?ctrl.signal:undefined})
+        .then(function(r){if(t)clearTimeout(t);if(!r.ok)throw 0;return r.json();},
+              function(e){if(t)clearTimeout(t);throw e;});
+    }
+    var seen=false; try{seen=localStorage.getItem('bcc_seen')==='1';}catch(e){}
+    var ns='bcc-clinical-trials', key='visitors';
+    var primary='https://abacus.jasoncameron.dev/'+(seen?'get':'hit')+'/'+ns+'/'+key;
+    var fallback='https://api.counterapi.dev/v1/'+ns+'/'+key+'/up';
+    timed(primary)
+      .then(function(d){ var v=d&&d.value; if(v==null||isNaN(v))throw 0;
+        show(v); if(!seen){try{localStorage.setItem('bcc_seen','1');}catch(e){}} })
+      .catch(function(){
+        return timed(fallback).then(function(d){ var v=d&&d.count; if(v==null||isNaN(v))throw 0; show(v); });
+      })
+      .catch(function(){/* both services unreachable — leave the counter hidden */});
+  })();
 </script>
 </body>
 </html>
