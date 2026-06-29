@@ -200,6 +200,9 @@
   .visitors__n{font-family:var(--serif);font-weight:600;color:#fff;font-size:1.02rem;}
   .visitors__dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--aqua);animation:vpulse 2.2s ease-out infinite;}
   @keyframes vpulse{0%{box-shadow:0 0 0 0 rgba(95,182,196,.55);}70%{box-shadow:0 0 0 8px rgba(95,182,196,0);}100%{box-shadow:0 0 0 0 rgba(95,182,196,0);}}
+  .founders{display:inline-flex;align-items:center;gap:9px;margin:.2rem 0 1.7rem;padding:8px 17px;border-radius:999px;background:var(--mist);border:1px solid var(--line);color:var(--teal);font-weight:600;font-size:.92rem;}
+  .founders__n{font-family:var(--serif);font-size:1.08rem;color:var(--deep);}
+  .founders__dot{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--green);animation:vpulse 2.2s ease-out infinite;}
 
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
   .reveal.in-view{opacity:1;transform:none;}
@@ -458,7 +461,8 @@
     <div class="reveal">
       <p class="eyebrow">Get involved</p>
       <h2 style="font-size:clamp(1.9rem,3.6vw,2.6rem)">Help us build it.</h2>
-      <p class="lead" style="margin:1rem auto 2rem">Join the list to follow our progress, explore giving, or get involved as a clinician or partner. We'll be in touch — no spam, ever.</p>
+      <p class="lead" style="margin:1rem auto 1.4rem">Join the list to follow our progress, explore giving, or get involved as a clinician or partner. We'll be in touch — no spam, ever.</p>
+      <p class="founders" id="foundersLine" hidden><span class="founders__dot" aria-hidden="true"></span><span><span class="founders__n">—</span>&nbsp;founding supporters and growing</span></p>
       <form class="signup" data-source="get-involved" style="justify-content:center" onsubmit="return handleSignup(this)" novalidate>
         <input type="email" name="email" placeholder="you@email.com" aria-label="Email address" required>
         <select name="interest" aria-label="I'm interested as a">
@@ -527,7 +531,7 @@
     var payload={email:email,interest:sel?sel.value:'',source:form.dataset.source||'',ts:new Date().toISOString()};
     if(SIGNUP_ENDPOINT){
       fetch(SIGNUP_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
-        .then(function(r){if(!r.ok)throw 0;showMsg(form,"Thank you — you're on the list. We'll be in touch.",'ok');form.reset();})
+        .then(function(r){if(!r.ok)throw 0;showMsg(form,"Thank you — you're on the list. We'll be in touch.",'ok');form.reset();bccFoundersBump();})
         .catch(function(){showMsg(form,'Something went wrong — please try again in a moment.','err');});
     } else {
       showMsg(form,"Thank you — you're on the list. We'll be in touch.",'ok');form.reset();
@@ -561,6 +565,38 @@
       })
       .catch(function(){/* both services unreachable — leave the counter hidden */});
   })();
+
+  // Founding supporters — REAL social proof, tied to actual stored sign-ups.
+  // Increments only on a genuinely successful POST to a configured endpoint, once per
+  // browser. Never seeds a fake number; stays hidden until there is >=1 real supporter.
+  var BCC_NS='bcc-clinical-trials', BCC_FKEY='founding-supporters';
+  function bccTimed(url){
+    var c=('AbortController' in window)?new AbortController():null;
+    var t=c?setTimeout(function(){c.abort();},6000):null;
+    return fetch(url,{cache:'no-store',signal:c?c.signal:undefined})
+      .then(function(r){if(t)clearTimeout(t);if(!r.ok)throw 0;return r.json();},
+            function(e){if(t)clearTimeout(t);throw e;});
+  }
+  function bccFoundersShow(v){
+    if(!(v>=1)) return;
+    var el=document.getElementById('foundersLine'); if(!el) return;
+    el.querySelector('.founders__n').textContent=Number(v).toLocaleString();
+    el.hidden=false;
+  }
+  function bccFoundersLoad(){
+    bccTimed('https://abacus.jasoncameron.dev/get/'+BCC_NS+'/'+BCC_FKEY)
+      .then(function(d){var v=d&&d.value;if(v!=null&&!isNaN(v))bccFoundersShow(v);})
+      .catch(function(){});
+  }
+  function bccFoundersBump(){
+    var done=false; try{done=localStorage.getItem('bcc_founder')==='1';}catch(e){}
+    if(done){ bccFoundersLoad(); return; }
+    bccTimed('https://abacus.jasoncameron.dev/hit/'+BCC_NS+'/'+BCC_FKEY)
+      .then(function(d){var v=d&&d.value;if(v!=null&&!isNaN(v)){bccFoundersShow(v);
+        try{localStorage.setItem('bcc_founder','1');}catch(e){}}})
+      .catch(function(){});
+  }
+  bccFoundersLoad();
 </script>
 </body>
 </html>
